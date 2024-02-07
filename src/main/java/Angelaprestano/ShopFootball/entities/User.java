@@ -1,6 +1,7 @@
 package Angelaprestano.ShopFootball.entities;
 
 import Angelaprestano.ShopFootball.entities.Enum.Role;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,19 +10,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class User implements UserDetails {
+    @Id
+    @GeneratedValue
     private UUID id;
     private String name;
     private String surname;
     private String email;
     private String password;
     private String avatar;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override

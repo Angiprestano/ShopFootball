@@ -35,7 +35,7 @@ import java.util.stream.Stream;
                 String accessToken = authHeader.substring(7);
                 jwTTools.verifyToken(accessToken);
 
-                String id = JWTTools.extractIdFromToken(accessToken);
+                String id = jwTTools.extractIdFromToken(accessToken);
                 User user = userService.findById(UUID.fromString(id));
 
                 Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

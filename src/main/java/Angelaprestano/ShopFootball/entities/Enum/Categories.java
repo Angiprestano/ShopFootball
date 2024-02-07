@@ -1,6 +1,6 @@
 package Angelaprestano.ShopFootball.entities.Enum;
 
-public enum Genres {
+public enum Categories {
     WOMEN,
     MAN,
     KIDS
