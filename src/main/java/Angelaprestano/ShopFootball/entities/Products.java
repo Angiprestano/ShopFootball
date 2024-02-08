@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public abstract class Products {
+public class Products {
     @Id
     @GeneratedValue
     protected UUID id;
