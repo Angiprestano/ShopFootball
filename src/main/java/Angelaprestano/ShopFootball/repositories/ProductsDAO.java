@@ -27,4 +27,7 @@ public interface ProductsDAO extends JpaRepository<Products, UUID> {
     Page<Products> findBySize(Pageable pageable, @Param("size")Size size);
 
     List<Products> findByTypeofProductAndCategories(TypeofProduct typeofProduct, Categories categories);
+    List<Products> findByTitle(String title);
+    List<Products> findByPriceBetween(double minPrice, double maxPrice);
+    List<Products> findByTitleContaining(String partOfTitle);
 }

@@ -63,7 +63,19 @@ public class ProductsService {
 
  //   List<Products> tshirtsForWomen = productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.WOMEN);
 
- //   public List<Products> getTshirtsForWomen() {
- //       return productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.WOMEN);
-//    }
+    public List<Products> getTshirtsForWomen() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.WOMEN);
+    }
+
+    public List<Products> getProductsFilteredByPrice(double minPrice, double maxPrice) {
+        return productsDAO.findByPriceBetween(minPrice, maxPrice);
+    }
+
+    public List<Products> getProductsFilteredByTitle(String title) {
+        return productsDAO.findByTitle(title);
+    }
+    public List<Products> getProductsFilteredByTitleContaining(String partOfTitle) {
+        return productsDAO.findByTitleContaining(partOfTitle);
+    }
+
 }

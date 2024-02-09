@@ -25,8 +25,26 @@ public class ProductsController {
         return productsService.getProducts(page,size,orderBy);
     }
 
- //   @GetMapping("/tshirts/women")
-  //  public List<Products> getTshirtsForWomen() {
-  //      return productsService.getTshirtsForWomen();
+    @GetMapping("/tshirts/women")
+    public List<Products> getTshirtsForWomen() {
+        return productsService.getTshirtsForWomen();
+    }
+
+    @GetMapping("/filtered")
+    public List<Products> getFilteredProducts() {
+        double minPrice = 20.00;
+        double maxPrice = 40.00;
+        return productsService.getProductsFilteredByPrice(minPrice, maxPrice);
+    }
+
+    @GetMapping("/product_title")
+    public List<Products> getFindByTitle(@RequestParam String title) {
+        return productsService.getProductsFilteredByTitle(title);
+    }
+
+    @GetMapping("/part_title")
+    public List<Products> getProductsFilteredByTitleContaining(@RequestParam String partOfTitle) {
+        return productsService.getProductsFilteredByTitleContaining(partOfTitle);
+    }
     }
 
