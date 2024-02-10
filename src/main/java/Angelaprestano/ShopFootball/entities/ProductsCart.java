@@ -18,12 +18,12 @@ public class ProductsCart {
     @Id
     @GeneratedValue
     private UUID id;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @OneToMany
+    @JoinColumn(name = "cart_id")
     private List<Products> products = new ArrayList<>();
-    @ManyToOne
+    private LocalDateTime creationDate;
+    @OneToOne
     @JoinColumn(name = "order_id")
     private Order order;
-    private LocalDateTime creationDate;
-    private double totalCart;
+
 }

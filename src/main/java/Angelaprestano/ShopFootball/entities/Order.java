@@ -15,9 +15,9 @@ public class Order {
     @Id
     @GeneratedValue
     private UUID id;
-    @OneToMany
+    @OneToOne(mappedBy = "order")
     private ProductsCart productsCart;
-    private double payment;
+    private double toPay;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

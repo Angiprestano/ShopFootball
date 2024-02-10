@@ -9,5 +9,4 @@ public class ShopFootballApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShopFootballApplication.class, args);
 	}
-
 }
