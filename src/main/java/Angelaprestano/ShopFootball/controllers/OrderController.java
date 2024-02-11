@@ -1,12 +1,11 @@
 package Angelaprestano.ShopFootball.controllers;
 
 import Angelaprestano.ShopFootball.entities.Order;
+import Angelaprestano.ShopFootball.payloads.OrderPayload.OrderDTO;
+import Angelaprestano.ShopFootball.payloads.OrderPayload.OrderResponseDTO;
 import Angelaprestano.ShopFootball.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -16,8 +15,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/createOrder")
-    public Order createOrder(@RequestParam UUID idUser, @RequestParam UUID idCart) {
-        return orderService.createOrder(idUser, idCart);
+    @PostMapping("/creatOrder")
+    public OrderResponseDTO createOrder(@RequestBody OrderDTO orderDTO) {
+        return orderService.createOrder(orderDTO);
     }
 }

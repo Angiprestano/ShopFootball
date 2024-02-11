@@ -22,7 +22,7 @@ public class ProductsCartController {
         return productsCartService.createProductCart();
     }
 
-    @PostMapping("/{carrelloId} / addProducts")
+    @PostMapping("/{cartId}/addProducts")
     public ProductsCart addProduct(@PathVariable UUID cartId, @RequestBody List<UUID> ProductId) {
         return productsCartService.addProductAtCartVoid(cartId, ProductId );
     }

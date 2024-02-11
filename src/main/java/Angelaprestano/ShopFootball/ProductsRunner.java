@@ -90,14 +90,6 @@ public class ProductsRunner implements CommandLineRunner {
         productsDAO.save(pajamas1);
         Products pajamas2 = new Products("", "Pigiama  ", "", 20.00, "Black", Size.S, Categories.WOMEN, TypeofProduct.SWEATSHIRT);
         productsDAO.save(pajamas2);
-        Products pajamas3 = new Products("", "Pigiama", "", 30.00, "white", Size.S, Categories.WOMEN, TypeofProduct.PAJAMAS);
-        productsDAO.save(pajamas3);
-        Products pajamas4 = new Products("", "Pigiama ", "", 30.00, "white", Size.XS, Categories.WOMEN, TypeofProduct.PAJAMAS);
-        productsDAO.save(pajamas4);
-        Products pajamas5 = new Products("", "Pigiama", "", 30.99, "white", Size.ONESIZE, Categories.WOMEN, TypeofProduct.PAJAMAS);
-        productsDAO.save(pajamas5);
-        Products pajamas6 = new Products("", "Pigiama", "", 40.00, "Green", Size.ONESIZE, Categories.WOMEN, TypeofProduct.PAJAMAS);
-        productsDAO.save(pajamas6);
 
 
         Products tshir1 = new Products("https://store.inter.it/dw/image/v2/BJBQ_PRD/on/demandware.static/-/Sites-inter-master-catalog/default/dwe3310c44/images/large/23I002U6602_01.jpg?sw=1400&q=80", "Polo Inter", "Tshirt grigia, realizzata in cotone. Presenta un serpente al centro legato alla squadra, tutto definito con uno stemma calcistico al centro, in colore rosa", 24.99, "Grey", Size.L, Categories.MAN, TypeofProduct.TSHIRT);
@@ -141,9 +133,14 @@ public class ProductsRunner implements CommandLineRunner {
         productsDAO.save(swittshir8);
         Products swittshir9 = new Products("https://store.inter.it/dw/image/v2/BJBQ_PRD/on/demandware.static/-/Sites-inter-master-catalog/default/dwc6e04fcf/images/detail/23I002M0302_03.jpg?sw=700&sfrm=jpg&q=80", "IM FELPA GIROCOLLO BISCIONE", "Felpa nera, presenta la scritta INTER con il disegno del serpente in basso (legato alla squadra).", 39.99, "Grey", Size.XS, Categories.MAN, TypeofProduct.SWEATSHIRT);
         productsDAO.save(swittshir9);
+
+        //Pajamas
         Products pajamasMan1 = new Products("https://m.media-amazon.com/images/I/71iuMKNxR-L._AC_UY1000_.jpg", "Pigiama inter uomo", "Pigiama in cotone, maglia con stemma centrale", 35.99, "Grey", Size.L, Categories.MAN, TypeofProduct.PAJAMAS);
         productsDAO.save(pajamas1);
         Products pajamasMan2 = new Products("", "Pigiama  ", "", 20.00, "Black", Size.S, Categories.MAN, TypeofProduct.SWEATSHIRT);
         productsDAO.save(pajamas2);
+
+        //ACCESSORIES
+
     }
 }

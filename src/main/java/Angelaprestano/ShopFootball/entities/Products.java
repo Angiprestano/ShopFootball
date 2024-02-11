@@ -33,6 +33,7 @@ public class Products {
     @Enumerated(EnumType.STRING)
     protected TypeofProduct typeofProduct;
 
+
     public Products(String image, String title, String description, double price, String color, Size size, Categories categories, TypeofProduct typeofProduct) {
         this.image = image;
         this.title = title;

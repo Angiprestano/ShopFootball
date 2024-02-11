@@ -1,5 +1,6 @@
 package Angelaprestano.ShopFootball.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class ProductsCart {
     private UUID id;
     @OneToMany
     @JoinColumn(name = "cart_id")
+    @JsonIgnore
     private List<Products> products = new ArrayList<>();
     private LocalDateTime creationDate;
     @OneToOne

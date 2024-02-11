@@ -1,6 +1,7 @@
 package Angelaprestano.ShopFootball.entities;
 
 import Angelaprestano.ShopFootball.entities.Enum.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@JsonIgnoreProperties(value={"password","avatar","Role","authorities","isAccountNonExpired","enabled", "accountNonLocked","credentialsNonExpired","username"})
 public class User implements UserDetails {
     @Id
     @GeneratedValue

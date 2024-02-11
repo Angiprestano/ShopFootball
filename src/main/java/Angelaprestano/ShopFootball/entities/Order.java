@@ -1,5 +1,6 @@
 package Angelaprestano.ShopFootball.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,7 @@ public class Order {
     @GeneratedValue
     private UUID id;
     @OneToOne(mappedBy = "order")
+    @JsonIgnore
     private ProductsCart productsCart;
     private double toPay;
     @ManyToOne
