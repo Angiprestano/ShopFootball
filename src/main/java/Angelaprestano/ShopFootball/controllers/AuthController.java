@@ -1,5 +1,6 @@
 package Angelaprestano.ShopFootball.controllers;
 
+import Angelaprestano.ShopFootball.entities.Enum.Role;
 import Angelaprestano.ShopFootball.entities.User;
 import Angelaprestano.ShopFootball.exceptions.BadRequestException;
 import Angelaprestano.ShopFootball.payloads.UserPayload.UserDTO;
@@ -29,11 +30,27 @@ public class AuthController {
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDTO createUser(@RequestBody @Validated UserDTO newUserPayload, BindingResult validation) {
         if (validation.hasErrors()) {
-            System.out.println(validation.hasErrors());
-            throw new BadRequestException(validation.getAllErrors());
+            throw new BadRequestException("There are errors in Payload!");
         } else {
-            User newUser = authService.save(newUserPayload);
-            return new UserResponseDTO(newUser.getId());
+            String name = newUserPayload.name();
+            String surname= newUserPayload.surname();
+            String email = newUserPayload.email();
+            String address= newUserPayload.address();
+            String password = newUserPayload.password();
+            Role role = newUserPayload.role();
+            String avatar = newUserPayload.avatar();
+
+            User newUser = new User();
+            newUser.setName(name);
+            newUser.setSurname(surname);
+            newUser.setEmail(email);
+            newUser.setAddress(address);
+            newUser.setPassword(password);
+            newUser.setRole(role);
+            newUser.setAvatar(avatar);
+
+            User user = authService.save(newUserPayload);
+            return new UserResponseDTO(user.getId());
         }
     }
 }

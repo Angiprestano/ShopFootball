@@ -33,6 +33,11 @@ public class AuthService {
     }
 
     public User save(UserDTO body) {
+
+        if (body.address() == null || body.address().isEmpty()) {
+            throw new BadRequestException("The address is required!");
+        }
+
         userDao.findByEmail(body.email()).ifPresent(user -> {
             throw new BadRequestException("This email " + user.getEmail() + " is already use!");
         });
@@ -43,9 +48,10 @@ public class AuthService {
         newUser.setName(body.name());
         newUser.setSurname(body.surname());
         newUser.setEmail(body.email());
+        newUser.setAddress(body.address());
         newUser.setPassword(bcrypt.encode(body.password()));
         newUser.setRole(Role.USER);
-        newUser.setAvatar("https://ui-avatars.com/api/?name=" + body.name() + "+" + body.surname());
+        newUser.setAvatar("https://ui-avatars.com/api/?name=" + body.name() + body.surname());
         return userDao.save(newUser);
     }
 }

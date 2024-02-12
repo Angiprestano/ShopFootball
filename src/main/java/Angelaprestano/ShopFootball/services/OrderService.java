@@ -95,6 +95,7 @@ public class OrderService {
                 user.getName(),
                 user.getSurname(),
                 user.getEmail(),
+                user.getAddress(),
                 totalToPay
         );
     }

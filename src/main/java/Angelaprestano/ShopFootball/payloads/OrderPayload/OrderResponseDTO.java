@@ -12,6 +12,7 @@ public record OrderResponseDTO(
         String userName,
         String userSurname,
         String userEmail,
+        String address,
         double totalToPay
 ) {
 }
