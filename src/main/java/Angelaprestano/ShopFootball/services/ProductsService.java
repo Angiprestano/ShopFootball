@@ -63,6 +63,9 @@ public class ProductsService {
 
  //   List<Products> tshirtsForWomen = productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.WOMEN);
 
+    public List<Products> getTshirtsForMan() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.MAN);
+    }
     public List<Products> getTshirtsForWomen() {
         return productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.WOMEN);
     }

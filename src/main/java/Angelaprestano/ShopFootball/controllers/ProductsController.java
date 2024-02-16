@@ -25,6 +25,10 @@ public class ProductsController {
         return productsService.getProducts(page,size,orderBy);
     }
 
+    @GetMapping("/tshirts/man")
+    public List<Products> getTshirtsForMan() {
+        return productsService.getTshirtsForMan();
+    }
     @GetMapping("/tshirts/women")
     public List<Products> getTshirtsForWomen() {
         return productsService.getTshirtsForWomen();
