@@ -6,5 +6,7 @@ public enum TypeofProduct {
     PANTS,
     SUIT,
     PAJAMAS,
-    ACCESSORIES
+    SETFOOTBALL,
+    ACCESSORIES,
+    SALES
 }
