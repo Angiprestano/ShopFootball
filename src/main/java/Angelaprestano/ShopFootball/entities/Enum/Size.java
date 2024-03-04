@@ -6,5 +6,9 @@ public enum Size {
     M,
     L,
     XL,
-    ONESIZE
+    ONESIZE,
+    SIX_YEARS,
+    EIGHT_YEARS,
+    TEN_YEARS,
+    TWELVE_YEARS,
 }

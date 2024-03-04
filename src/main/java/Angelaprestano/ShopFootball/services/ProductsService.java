@@ -44,6 +44,22 @@ public class ProductsService {
         return productsDAO.save(newproducts);
     }
 
+    public ProductsDTO getProductsById(UUID id) {
+        Products products = productsDAO.findById(id)
+                .orElseThrow(() -> new NotFoundException("Prodotto non trovato con ID: " + id));
+        return new ProductsDTO(
+                products.getId(),
+                products.getImage(),
+                products.getTitle(),
+                products.getDescription(),
+                products.getColor(),
+                products.getPrice(),
+                products.getSize(),
+                products.getCategories(),
+                products.getTypeofProduct()
+        );
+    }
+
     public Products findByIdAndUpdate(UUID id, ProductsDTO body) {
         Products found = this.findById(id);
         found.setImage(body.image());
@@ -61,8 +77,60 @@ public class ProductsService {
         productsDAO.delete(found);
     }
 
- //   List<Products> tshirtsForWomen = productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.WOMEN);
+    public List<Products> getAllAccessories() {
+        return productsDAO.findByTypeofProduct(TypeofProduct.ACCESSORIES);
+    }
 
+    public List<Products> getSalesTshirt() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SALES, Categories.UNISEX);
+    }
+    public List<Products> getPantsMan() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.PANTS, Categories.MAN);
+    }
+
+
+    public List<Products> getCalcioWomen() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SETFOOTBALL, Categories.WOMEN);
+    }
+    public List<Products> getCalcioMan() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SETFOOTBALL, Categories.MAN);
+    }
+    public List<Products> getTshirtForKids() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.KIDS);
+    }
+    public List<Products> getCalcioKids() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SETFOOTBALL, Categories.KIDS);
+    }
+    public List<Products> getSuitForKids() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SUIT, Categories.KIDS);
+    }
+    public List<Products> getFelpaForKids() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SWEATSHIRT, Categories.KIDS);
+    }
+    public List<Products> getPajamasForKids() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.PAJAMAS, Categories.KIDS);
+    }
+    public List<Products> getSuitForWomen() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SUIT, Categories.WOMEN);
+    }
+    public List<Products> getSuitForMan() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SUIT, Categories.MAN);
+    }
+    public List<Products> getPajamasForMan() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.PAJAMAS, Categories.MAN);
+    }
+    public List<Products> getPajamasForWomen() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.PAJAMAS, Categories.WOMEN);
+    }
+    public List<Products> getSweatshirtForWomen() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SWEATSHIRT, Categories.WOMEN);
+    }
+    public List<Products> getSweatshirtForMan() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.SWEATSHIRT, Categories.MAN);
+    }
+    public List<Products> getTshirtsForMan() {
+        return productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.MAN);
+    }
     public List<Products> getTshirtsForWomen() {
         return productsDAO.findByTypeofProductAndCategories(TypeofProduct.TSHIRT, Categories.WOMEN);
     }

@@ -30,4 +30,5 @@ public interface ProductsDAO extends JpaRepository<Products, UUID> {
     List<Products> findByTitle(String title);
     List<Products> findByPriceBetween(double minPrice, double maxPrice);
     List<Products> findByTitleContaining(String partOfTitle);
+    List<Products> findByTypeofProduct(TypeofProduct typeofProduct);
 }

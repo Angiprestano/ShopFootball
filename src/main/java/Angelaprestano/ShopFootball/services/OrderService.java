@@ -2,14 +2,12 @@ package Angelaprestano.ShopFootball.services;
 
 import Angelaprestano.ShopFootball.entities.Order;
 import Angelaprestano.ShopFootball.entities.Products;
-import Angelaprestano.ShopFootball.entities.ProductsCart;
 import Angelaprestano.ShopFootball.entities.User;
 import Angelaprestano.ShopFootball.payloads.OrderDetailDTO;
 import Angelaprestano.ShopFootball.payloads.OrderPayload.OrderDTO;
 import Angelaprestano.ShopFootball.payloads.OrderPayload.OrderResponseDTO;
 import Angelaprestano.ShopFootball.payloads.ProductsDTO;
 import Angelaprestano.ShopFootball.repositories.OrderDAO;
-import Angelaprestano.ShopFootball.repositories.ProductsCartDAO;
 import Angelaprestano.ShopFootball.repositories.ProductsDAO;
 import Angelaprestano.ShopFootball.repositories.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,80 +28,32 @@ public class OrderService {
     @Autowired
     private ProductsDAO productsDAO;
 
-    @Autowired
-    private ProductsCartDAO productsCartDAO;
+    public Order createOrder(OrderDTO orderDTO, User user) {
 
-    private List<ProductsDTO> recuperateDetailProduct(OrderDTO orderDTO) {
-        List<ProductsDTO> detailProduct = new ArrayList<>();
-        for (OrderDetailDTO detail : orderDTO.orderDetail()) {
-            Products products = productsDAO.findById(detail.idProduct())
-                    .orElseThrow(() -> new RuntimeException("Product not found with ID: " + detail.idProduct()));
-            detailProduct.add(new ProductsDTO(
-                    products.getId(),
-                    products.getImage(),
-                    products.getTitle(),
-                    products.getDescription(),
-                    products.getColor(),
-                    products.getPrice(),
-                    products.getSize(),
-                    products.getCategories(),
-                    products.getTypeofProduct()
-
-            ));
+        List<Products> productList=new ArrayList<>();
+        double total=0.0;
+        User founds= userDAO.findById(user.getId())
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + user.getId()));
+        for(UUID idProducts: orderDTO.listProduct()){
+            Products found= productsDAO.findById(idProducts)
+                    .orElseThrow(() -> new RuntimeException("Utente non trovato con ID: " + idProducts));
+            productList.add(found);
+            total += found.getPrice();
         }
-        return detailProduct;
-    }
-
-    private double recuperatePriceProduct(UUID idProduct) {
-        Products product = productsDAO.findById(idProduct)
-                .orElseThrow(() -> new RuntimeException("Product not found with ID: " + idProduct));
-        // mi  Restituisce il prezzo di un prodotto recuperato dal DB
-        return product.getPrice();
-    }
-
-    private double totalCalculation(List<OrderDetailDTO> orderDetail) {
-        if (orderDetail == null) {
-            return 0.0;
-        }
-        return orderDetail.stream()
-                .mapToDouble(detail -> {
-
-                    return detail.quantity() * recuperatePriceProduct(detail.idProduct());
-                })
-                .sum();
-    }
-
-    public OrderResponseDTO createOrder(OrderDTO orderDTO) {
-
-        User user = userDAO.findById(orderDTO.idUser())
-                .orElseThrow(() -> new RuntimeException("Utente non trovato con ID: " + orderDTO.idUser()));
-
-        ProductsCart cart = productsCartDAO.findById(orderDTO.idCart())
-                .orElseThrow(() -> new RuntimeException("Carrello non trovato con ID: " + orderDTO.idCart()));
-
-        double totalToPay = totalCalculation(orderDTO.orderDetail());
         Order order = new Order();
-        order.setUser(user);
-        order.setProductsCart(cart);
-        order.setToPay(totalToPay);
-        order = orderDAO.save(order);
-        List<ProductsDTO> detailProducts= recuperateDetailProduct(orderDTO);
-        return new OrderResponseDTO(
-                order.getId(),
-                detailProducts,
-                user.getId(),
-                user.getName(),
-                user.getSurname(),
-                user.getEmail(),
-                user.getAddress(),
-                totalToPay
-        );
+        order.setUser(founds);
+        order.setToPay(total);
+        order.setDetailsProduct(productList);
+        return orderDAO.save(order);
     }
 
-    private double totalCalculation(ProductsCart cart) {
+    public List<Order> getOrderUser(User user) {
+        return orderDAO.findByUser(user);
+    }
 
-        return cart.getProducts().stream()
-                .mapToDouble(Products::getPrice)
-                .sum();
+    public Order findById(UUID id){
+        return orderDAO.findById(id).orElseThrow(() -> new RuntimeException("Utente non trovato con ID: " + id));
     }
 }
+
+
