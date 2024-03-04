@@ -8,5 +8,6 @@ public enum TypeofProduct {
     PAJAMAS,
     SETFOOTBALL,
     ACCESSORIES,
-    SALES
+    SALES,
+    NEWCOLLECTION
 }
